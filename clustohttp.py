@@ -380,7 +380,7 @@ class EntityProxy(object):
         for p in parents:
             if p.type == 'role':
                 return p.name.split('role-').pop()
-        for p in self.parents():
+        for p in parents:
             if p.attr_value(key='pooltype') == 'role':
                 return p.name
         return None
