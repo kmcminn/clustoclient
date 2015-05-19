@@ -376,9 +376,11 @@ class EntityProxy(object):
 
     @property
     def role(self):
+        parents = filter(lambda x: x.type == 'role' or x.type == 'pool', self.parents())
+        for p in parents:
+            if p.type == 'role':
+                return p.name.split('role-').pop()
         for p in self.parents():
-            if p.type != 'pool':
-                continue
             if p.attr_value(key='pooltype') == 'role':
                 return p.name
         return None
